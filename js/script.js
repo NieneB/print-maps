@@ -64,7 +64,7 @@ try {
         center: [0, 0],
         zoom: 0.5,
         pitch: 0,
-        style: "https://apps.webmapper.nl/gebouwen_foss4gnl/json/style.json"
+        style: form.styleSelect.value
     });
     map.addControl(new mapboxgl.NavigationControl({
         position: 'top-left'
