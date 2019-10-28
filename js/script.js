@@ -20,8 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-mapboxgl.accessToken = '';
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibmllbmViIiwiYSI6IlR6NWEzdmMifQ.dRVGdAluvTb9EIXVBREbzw';
 
 var form = document.getElementById('config');
 
@@ -50,11 +50,15 @@ function updateLocationInputs() {
 
     var zoom = parseFloat(map.getZoom()).toFixed(2),
         lat = parseFloat(center[1]).toFixed(4),
-        lon = parseFloat(center[0]).toFixed(4);
+        lon = parseFloat(center[0]).toFixed(4),
+        tilt= parseFloat(map.getPitch()).toFixed(2),
+        bear = parseFloat(map.getBearing()).toFixed(2);
 
     form.zoomInput.value = zoom;
     form.latInput.value = lat;
     form.lonInput.value = lon;
+    form.tiltInput.value = tilt;
+    form.bearingInput.value = bear;
 }
 
 var map;
@@ -64,6 +68,7 @@ try {
         center: [0, 0],
         zoom: 0.5,
         pitch: 0,
+        hash: true,
         style: form.styleSelect.value
     });
     map.addControl(new mapboxgl.NavigationControl({
@@ -283,6 +288,15 @@ form.zoomInput.addEventListener('change', function(e) {
     map.setZoom(e.target.value);
 });
 
+form.tiltInput.addEventListener('change', function (e) {
+    'use strict';
+    map.setPitch(e.target.value);
+});
+
+form.bearingInput.addEventListener('change', function (e) {
+    'use strict';
+    map.setBearing(e.target.value);
+});
 
 //
 // Error modal
